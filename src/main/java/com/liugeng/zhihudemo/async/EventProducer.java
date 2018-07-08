@@ -19,6 +19,7 @@ public class EventProducer {
             System.out.println(eventJSON);
             String key = RedisKeyUtil.getEventQueueKey();
             jedisAdapter.lpush(key, eventJSON);
+            System.out.println("救命啊！我不想卡在这里！！！");
             return true;
         } catch (Exception e) {
             e.printStackTrace();

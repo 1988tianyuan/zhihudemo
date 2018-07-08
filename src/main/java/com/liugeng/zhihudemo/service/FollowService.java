@@ -5,6 +5,7 @@ import com.liugeng.zhihudemo.utils.JedisAdapter;
 import com.liugeng.zhihudemo.utils.RedisKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Transaction;
 
 import java.util.ArrayList;
@@ -21,20 +22,22 @@ public class FollowService {
         String followerKey = RedisKeyUtil.getFollowerKey(entityType, entityId);
         String followeeKey = RedisKeyUtil.getFolloweeKey(userId, entityType);
         Date date = new Date();
-        Transaction tx = jedisAdapter.redisMulti();
+        Jedis jedis = jedisAdapter.getJedis();
+        Transaction tx = jedisAdapter.redisMulti(jedis);
         tx.zadd(followerKey, date.getTime(), String.valueOf(userId));
         tx.zadd(followeeKey, date.getTime(), String.valueOf(entityId));
-        List<Object> result = jedisAdapter.redisExec(tx);   //返回事务中每个操作的执行结果
+        List<Object> result = jedisAdapter.redisExec(tx, jedis);   //返回事务中每个操作的执行结果
         return result.size() == 2 && (long)result.get(0)>0 && (long)result.get(1)>0;
     }
 
     public boolean unFollow(int userId, int entityType, int entityId){
         String followerKey = RedisKeyUtil.getFollowerKey(entityType, entityId);
         String followeeKey = RedisKeyUtil.getFolloweeKey(userId, entityType);
-        Transaction tx = jedisAdapter.redisMulti();
+        Jedis jedis = jedisAdapter.getJedis();
+        Transaction tx = jedisAdapter.redisMulti(jedis);
         tx.zrem(followerKey, String.valueOf(userId));
         tx.zrem(followeeKey, String.valueOf(entityId));
-        List<Object> result = jedisAdapter.redisExec(tx);   //返回事务中每个操作的执行结果
+        List<Object> result = jedisAdapter.redisExec(tx, jedis);   //返回事务中每个操作的执行结果
         return result.size() == 2 && (long)result.get(0)>0 && (long)result.get(1)>0;
     }
 
@@ -71,6 +74,19 @@ public class FollowService {
     public boolean isFollower(int entityType, int entityId, int userId){
         String followerKey = RedisKeyUtil.getFollowerKey(entityType, entityId);
         return jedisAdapter.zscore(followerKey, String.valueOf(userId)) > 0;
+    }
+
+    public List<Integer> getSharedFollowees(int uid1, int uid2, int entityType){
+        String followeeKey1 = RedisKeyUtil.getFolloweeKey(uid1, entityType);
+        String followeeKey2 = RedisKeyUtil.getFolloweeKey(uid2, entityType);
+        Set<String> sharedFollowees = jedisAdapter.zinterStore(followeeKey1, followeeKey2);
+        List<Integer> sharedFolloweeList = new ArrayList<>();
+        if(!sharedFollowees.isEmpty()){
+            for(String s : sharedFollowees){
+                sharedFolloweeList.add(Integer.valueOf(s));
+            }
+        }
+        return sharedFolloweeList;
     }
 
 }

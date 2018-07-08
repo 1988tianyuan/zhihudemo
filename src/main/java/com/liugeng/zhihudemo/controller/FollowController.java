@@ -134,6 +134,9 @@ public class FollowController {
         return "followers";
     }
 
+
+
+
     private List<ViewObject> getViewObjects(List<Integer> list){
         List<ViewObject> viewObjects = new ArrayList<>();
         int localUid = hostHolder.getUser().getId();

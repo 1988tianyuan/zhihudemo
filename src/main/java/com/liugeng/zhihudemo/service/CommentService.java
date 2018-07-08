@@ -57,7 +57,6 @@ public class CommentService {
         if(comment.getEntityType()==0){
             int oldCommentCount = getCommentsCount(comment.getEntityId(), comment.getEntityType());
             int newCommentCount = ++oldCommentCount;
-            System.out.println("问题"+comment.getEntityType()+"的最新回答数目是："+newCommentCount);
             questionService.updateCommentCount(comment.getEntityId(), newCommentCount);
         }
         return commentDao.addComment(comment)>0 ? comment.getId():0;

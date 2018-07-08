@@ -63,9 +63,9 @@
                                                 <a href="#" name="addcomment" class="meta-item toggle-comment js-toggleCommentBox">
                                                     <i class="z-icon-comment"></i>${vo.get("question").commentCount} 条评论
                                                 </a>
-                                                <button class="meta-item item-collapse js-collapse">
-                                                    <i class="z-icon-fold"></i><收起></收起>
-                                                </button>
+                                                <a href="#" name="addcomment" class="meta-item toggle-comment js-toggleCommentBox">
+                                                    <i class="z-icon-fold"></i>${vo.get("followCount")}人收藏该问题
+                                                </a>
                                             </div>
                                         </div>
                                     </div>

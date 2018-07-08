@@ -28,7 +28,7 @@ public class QuestionService {
     }
 
     public List<ViewObject> getQuestionsAndUsers(int uid, int offset, int limit, int localUid){
-        List<Question> questionList = getLatestQuestion(uid,offset,limit);
+        List<Question> questionList = getLatestQuestion(uid, offset, limit);
         List<ViewObject> viewObjectList = new ArrayList<>();
         for(Question question:questionList){
             ViewObject viewObject = new ViewObject();

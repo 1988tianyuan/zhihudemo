@@ -32,16 +32,16 @@ public class JedisAdapter implements InitializingBean{
         return pool.getResource();
     }
 
-    public Transaction redisMulti(){
+    public Transaction redisMulti(Jedis jedis){
         try {
-            return getJedis().multi();
+            return jedis.multi();
         } catch (Exception e) {
             logger.error("开启redis事务时发生异常：" + e.getMessage());
         }
         return null;
     }
 
-    public List<Object> redisExec(Transaction tx){
+    public List<Object> redisExec(Transaction tx, Jedis jedis){
         try {
             return tx.exec();
         } catch (Exception e) {
@@ -53,6 +53,9 @@ public class JedisAdapter implements InitializingBean{
               } catch (IOException e) {
                   e.printStackTrace();
               }
+          }
+          if(jedis != null){
+              jedis.close();//一定记得把这个jedis连接关掉
           }
         }
         return null;
@@ -120,19 +123,46 @@ public class JedisAdapter implements InitializingBean{
 
     public long lpush(String key, String value){
         Jedis jedis = null;
-        jedis = pool.getResource();
-        return jedis.lpush(key, value);
+        try{
+            jedis = pool.getResource();
+            return jedis.lpush(key, value);
+        } catch (Exception e){
+            logger.error("向队列 "+ key +" 中加入元素时发生错误："+e.getMessage());
+        } finally {
+            if(jedis != null){
+                jedis.close();
+            }
+        }
+        return 0;
     }
 
     public List<String> brpop(int timeOut, String key){
         Jedis jedis = null;
-        jedis = pool.getResource();
-        return jedis.brpop(0 ,key);
+        try{
+            jedis = pool.getResource();
+            return jedis.brpop(0 ,key);
+        } catch (Exception e){
+            logger.error("阻塞获取异步消息队列的过程发生错误："+e.getMessage());
+        } finally {
+            if(jedis != null){
+                jedis.close();
+            }
+        }
+        return null;
     }
 
     public List<String> lrange(String key, int start, int end){
         Jedis jedis = pool.getResource();
-        return jedis.lrange(key, start ,end);
+        try {
+            return jedis.lrange(key, start ,end);
+        } catch (Exception e) {
+            logger.error("发生异常：" + e.getMessage());
+        } finally {
+            if(jedis != null){
+                jedis.close();
+            }
+        }
+        return null;
     }
 
     public long zadd(String key, String value, double score){
@@ -208,5 +238,22 @@ public class JedisAdapter implements InitializingBean{
             }
         }
         return 0;
+    }
+
+    public Set<String> zinterStore(String setName1, String setName2){
+        Jedis jedis = null;
+        try {
+            jedis = getJedis();
+            String dstKey = "sharedZset";
+            jedis.zinterstore(dstKey, setName1, setName2);
+            return jedis.zrangeByLex(dstKey, "-", "+");
+        } catch (Exception e) {
+            logger.error("查找set交集时发生异常：" + e.getMessage());
+        } finally {
+            if(jedis != null){
+                jedis.close();
+            }
+        }
+        return null;
     }
 }
