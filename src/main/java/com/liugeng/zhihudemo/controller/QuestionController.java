@@ -1,5 +1,8 @@
 package com.liugeng.zhihudemo.controller;
 
+import com.liugeng.zhihudemo.async.EventModel;
+import com.liugeng.zhihudemo.async.EventProducer;
+import com.liugeng.zhihudemo.async.EventType;
 import com.liugeng.zhihudemo.pojo.*;
 import com.liugeng.zhihudemo.service.CommentService;
 import com.liugeng.zhihudemo.service.FollowService;
@@ -18,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/question")
 public class QuestionController {
     @Autowired
     QuestionService questionService;
@@ -30,10 +32,12 @@ public class QuestionController {
     FollowService followService;
     @Autowired
     UserService userService;
+    @Autowired
+    EventProducer eventProducer;
 
     private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-    @RequestMapping(value = "/add", method = {RequestMethod.POST})
+    @RequestMapping(value = "/question/add", method = {RequestMethod.POST})
     @ResponseBody
     public String addQuestion(Question question){
         try{
@@ -41,6 +45,12 @@ public class QuestionController {
                 return ZhihuUtils.getJSONString(999);
             }
             if(questionService.addQuestion(question, hostHolder.getUser().getId())>0){
+                //添加问题成功后，发布添加问题的事件，用于添加到solr库等
+                eventProducer.fireEvent(new EventModel(EventType.ADD_QUESTION)
+                        .setEntityId(question.getId())
+                        .setExt("question_title", question.getTitle())
+                        .setExt("question_content", question.getContent()));
+
                 return ZhihuUtils.getJSONString(0);
             }
         }catch (Exception e){
@@ -49,8 +59,8 @@ public class QuestionController {
         return ZhihuUtils.getJSONString(1, "添加问题失败！");
     }
 
-    @RequestMapping("/{qid}")
-    public String questionDetail(@PathVariable("qid")int qid, Model model){
+    @RequestMapping("/question/{qid}")
+        public String questionDetail(@PathVariable("qid")int qid, Model model){
         try {
             Question question = questionService.getQuestionById(qid);
             List<ViewObject> viewObjects = commentService.getCommentsAndUsers(qid, 0, 0, 0, hostHolder.getUser());

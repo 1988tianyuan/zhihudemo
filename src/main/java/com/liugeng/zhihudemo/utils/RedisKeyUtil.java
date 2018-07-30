@@ -1,5 +1,6 @@
 package com.liugeng.zhihudemo.utils;
 
+import com.sun.org.apache.regexp.internal.RE;
 import org.omg.CORBA.PUBLIC_MEMBER;
 
 public class RedisKeyUtil {
@@ -10,6 +11,8 @@ public class RedisKeyUtil {
     private static final String BIZ_FOLLOWER = "FOLLOWER";
     private static final String BIZ_FOLLOWEE = "FOLLOWEE";
     private static final String BIZ_TIMELINE = "TIMELINE";
+    private static final String BIZ_USERLIKENUMKEY = "USERLIKENUM";
+    private static final String BIZ_LIKEKEYBYUSER = "LIKEKEYBYUSER";
 
     public static String getLikeKey(int entityId, int entityType){
          return BIZ_lIKE + SPLIT + entityId + SPLIT + entityType;
@@ -33,5 +36,13 @@ public class RedisKeyUtil {
 
     public static String getTimelineKey(int userId){
         return BIZ_TIMELINE + SPLIT + String.valueOf(userId);
+    }
+
+    public static String getUserLikeNumKey(int userId){
+        return BIZ_USERLIKENUMKEY + SPLIT + String.valueOf(userId);
+    }
+
+    public static String getLikeKeyByUser(int userId){
+        return BIZ_LIKEKEYBYUSER + SPLIT + String.valueOf(userId);
     }
 }

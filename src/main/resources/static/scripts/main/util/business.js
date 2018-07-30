@@ -72,7 +72,7 @@
                         oListEl.find('.js-user-' + oResult.id).remove();
                     } else {
                         // 显示用户
-                        oListEl.prepend('<a class="zm-item-link-avatar js-user-' + oResult.id + '" href="/user/' + oResult.id + '" data-original_title="' + oResult.name + '"><img src="' + oResult.headUrl + '" class="zm-item-img-avatar"></a>');
+                        oListEl.prepend('<a class="zm-item-link-avatar js-user-' + oResult.id + '" href="/zhihudemo/user/' + oResult.id + '" data-original_title="' + oResult.name + '"><img src="' + oResult.headUrl + '" class="zm-item-img-avatar"></a>');
                     }
                 },
                 error: function (oResult) {

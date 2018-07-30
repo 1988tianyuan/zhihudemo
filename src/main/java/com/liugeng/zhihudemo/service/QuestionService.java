@@ -1,5 +1,8 @@
 package com.liugeng.zhihudemo.service;
 
+import com.liugeng.zhihudemo.async.EventModel;
+import com.liugeng.zhihudemo.async.EventProducer;
+import com.liugeng.zhihudemo.async.EventType;
 import com.liugeng.zhihudemo.dao.QuestionDao;
 import com.liugeng.zhihudemo.pojo.Comment;
 import com.liugeng.zhihudemo.pojo.Question;

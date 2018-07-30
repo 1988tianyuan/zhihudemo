@@ -31,7 +31,7 @@ public class LoginController {
 
     private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-    @RequestMapping(path = "/reg", method = {RequestMethod.POST})
+    @RequestMapping(path = "reg", method = {RequestMethod.POST})
     public String register(HttpServletResponse response, Model model, @RequestParam("username")String userName, @RequestParam("password")String password){
         try{
             Map<String, String> map = userService.register(userName, password);
@@ -44,7 +44,7 @@ public class LoginController {
                 model.addAttribute("msg", map.get("msg"));
                 return "login";
             }
-            return "redirect:/";
+            return "redirect:";
         }catch (Exception e){
             logger.error("注册过程出现异常：" + e.getMessage());
             e.printStackTrace();
@@ -52,7 +52,7 @@ public class LoginController {
         }
     }
 
-    @RequestMapping(path = "/login", method = {RequestMethod.POST})
+    @RequestMapping(path = "login", method = {RequestMethod.POST})
     public String login(Model model, HttpServletResponse response,
                         @RequestParam("username")String userName, @RequestParam("password")String password,
                         @RequestParam(value = "next", required = false)String next,
@@ -75,7 +75,7 @@ public class LoginController {
             if(StringUtils.hasText(next)){
                 return "redirect:" + next;
             }
-            return "redirect:/";
+            return "redirect:";
         }catch (Exception e){
             logger.error("登录过程出现异常：" + e.getMessage());
             e.printStackTrace();
@@ -83,16 +83,16 @@ public class LoginController {
         }
     }
 
-    @RequestMapping("/logout")
+    @RequestMapping("logout")
     public String logout(@CookieValue("ticket")String ticket){
         userService.logout(ticket);
-        return "redirect:/";
+        return "redirect:";
     }
 
 
 
     //跳转到登录注册页面
-    @RequestMapping("/reglogin")
+    @RequestMapping("reglogin")
     public String regLogin(@RequestParam(value = "next", required = false)String next, Model model){
         model.addAttribute("next", next);
         return "login";

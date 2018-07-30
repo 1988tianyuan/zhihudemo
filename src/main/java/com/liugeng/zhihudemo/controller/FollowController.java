@@ -149,7 +149,7 @@ public class FollowController {
             viewObject.set("followeeCount", followService.getFolloweeCount(i, CommentService.ENTITY_USER));
             viewObject.set("followerCount", followService.getFollowerCount(CommentService.ENTITY_USER, i));
             viewObject.set("commentCount", commentService.getUserCommentCount(i));
-            viewObject.set("likeCount", likeService.likeCountByUser(i, CommentService.ENTITY_COMMENT));
+            viewObject.set("likeCount", likeService.likeCountByUser(i));
             viewObject.set("followed", followService.isFollower(CommentService.ENTITY_USER, i, localUid));
             viewObject.set("user", userService.getUser(i));
             viewObjects.add(viewObject);

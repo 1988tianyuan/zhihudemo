@@ -54,7 +54,7 @@ public class HomeController {
         return null;
     }
 
-    @RequestMapping("/user/{uid}")
+    @RequestMapping("user/{uid}")
     public String userPage(@PathVariable("uid")int uid, Model model){
         try {
             User localUser = hostHolder.getUser();
@@ -73,7 +73,7 @@ public class HomeController {
             vo.set("followeeCount", followService.getFolloweeCount(uid, CommentService.ENTITY_USER));
             vo.set("commentCount", commentService.getUserCommentCount(uid));
             vo.set("followed", followService.isFollower(CommentService.ENTITY_USER, uid, localUid));
-            vo.set("likeCount", likeService.likeCountByUser(uid, CommentService.ENTITY_COMMENT));
+            vo.set("likeCount", likeService.likeCountByUser(uid));
 
             //提取共同关注对象
             List<Integer> sharedFolloweeIds = followService.getSharedFollowees(localUid, uid, CommentService.ENTITY_USER);

@@ -7,18 +7,6 @@
             <meta itemprop="isTopQuestion" content="false">
             <meta itemprop="visitsCount" content="402">
 
-            <#--<div class="zm-tag-editor zg-section">-->
-                <#--<div class="zm-tag-editor-labels zg-clear">-->
-                    <#--<a data-tip="t$b$19550730" class="zm-item-tag" href="">新浪微博</a>-->
-                    <#--<a data-tip="t$b$19554412" class="zm-item-tag" href="">网络营销</a>-->
-                    <#--<a data-tip="t$b$19559739" class="zm-item-tag" href="">微博粉丝</a>-->
-                    <#--<a data-tip="t$b$19560290" class="zm-item-tag" href="">僵尸粉</a>-->
-                    <#--<a data-tip="t$b$19565757" class="zm-item-tag" href="">网络水军</a>-->
-                    <#--<a href="javascript:;" class="zu-edit-button" name="edit">-->
-                        <#--<i class="zu-edit-button-icon"></i>修改</a>-->
-                <#--</div>-->
-            <#--</div>-->
-
             <div id="zh-question-title" data-editable="true" class="zm-editable-status-normal">
                 <h2 class="zm-item-title">
                     <span class="zm-editable-content">${question.title}</span>
@@ -45,9 +33,9 @@
                         </div>
                         <div class="list zu-small-avatar-list zg-clear">
                              <#list followers as follower>
-                                 <a data-tip="p$b$yi-yi-98-91-99" class="zm-item-link-avatar" href="/user/${follower.id}"
+                                 <a data-tip="p$b$yi-yi-98-91-99" class="zm-item-link-avatar" href="${request.contextPath}/user/${follower.id}"
                                     data-original_title="${follower.name}">
-                                     <img src="${follower.headUrl}"
+                                     <img src="${request.contextPath}${follower.headUrl}"
                                           class="zm-item-img-avatar">
                                  </a>
                              </#list>
@@ -61,7 +49,7 @@
 
                 <#list comments as comment>
                     <div class="zm-item-answer  zm-item-expanded js-comment">
-                        <link itemprop="url" href="">
+                        <link itemprop="url" href="#">
                         <meta itemprop="answer-id" content="22162611">
                         <meta itemprop="answer-url-token" content="66862039">
                         <a class="zg-anchor-hidden" name="answer-22162611"></a>
@@ -86,13 +74,13 @@
                         </div>
                         <div class="answer-head">
                             <div class="zm-item-answer-author-info">
-                                <a class="zm-item-link-avatar avatar-link" href="" target="_blank" data-tip="p$t$yingxiaodao">
-                                    <img src="${comment.get("user").headUrl}" class="zm-list-avatar avatar"></a>
-                                <a class="author-link" data-tip="p$t$yingxiaodao" target="_blank" href="/user/${comment.get("user").id}">${comment.get("user").name}</a>
+                                <a class="zm-item-link-avatar avatar-link" href="${request.contextPath}/user/${comment.get("user").id}" target="_blank" data-tip="p$t$yingxiaodao">
+                                    <img src="${request.contextPath}${comment.get("user").headUrl}" class="zm-list-avatar avatar"></a>
+                                <a class="author-link" data-tip="p$t$yingxiaodao" target="_blank" href="${request.contextPath}/user/${comment.get("user").id}">${comment.get("user").name}</a>
                             </div>
                             <div class="zm-item-vote-info">
                                 <span class="voters text">
-                                    <a href="" class="more text"><span class="js-voteCount">${comment.get("likeNum")}</span>&nbsp;人赞同</a>
+                                    <a href="#" class="more text"><span class="js-voteCount">${comment.get("likeNum")}</span>&nbsp;人赞同</a>
                                 </span>
                             </div>
                         </div>
@@ -106,22 +94,15 @@
                         <a class="zg-anchor-hidden ac" name="22162611-comment"></a>
                         <div class="zm-item-meta answer-actions clearfix js-contentActions">
                             <div class="zm-meta-panel">
-                                <a itemprop="url" class="answer-date-link meta-item" target="_blank" href="">发布于
+                                <a itemprop="url" class="answer-date-link meta-item" target="_blank" href="#">发布于
                                     ${comment.get("comment").createDate?string('yyyy年MM月dd日 hh:mm:ss')}</a>
-                                <a href="" name="addcomment" class="meta-item toggle-comment js-toggleCommentBox">
-                                    <i class="z-icon-comment"></i>4 条评论</a>
-                                <#--<a href="" class="meta-item zu-autohide js-thank" data-thanked="false">-->
-                                    <#--<i class="z-icon-thank"></i>感谢</a>-->
-                                <#--<button class="item-collapse js-collapse" style="transition: none;">-->
-                                    <#--<i class="z-icon-fold"></i>收起-->
-                                <#--</button>-->
                             </div>
                         </div>
                     </div>
                 </#list>
 
             </div>
-            <form action="/comment/addComment" method="post" id="commentform">
+            <form action="${request.contextPath}/comment/addComment" method="post" id="commentform">
                 <input type="hidden" name="entityId" value="${question.id}"/>
             <div id="zh-question-answer-form-wrap" class="zh-question-answer-form-wrap">
                 <div class="zm-editable-editor-wrap" style="">

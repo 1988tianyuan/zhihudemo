@@ -5,17 +5,14 @@
             <ul class="letter-list">
                 <#list conversations as conversation>
                 <li id="conversation-item-10001_622873">
-                    <a class="letter-link" href="/msg/detail?conversationId=${conversation.get("conversation").conversationId}">
+                    <a class="letter-link" href="${request.contextPath}/msg/detail?conversationId=${conversation.get("conversation").conversationId}">
                     </a>
                     <div class="letter-info">
                         <span class="l-time">${conversation.get("conversation").createDate?string('yyyy年MM月dd日 hh:mm:ss')}</span>
                         <div class="l-operate-bar">
-                            <a href="/msg/delete?conversationId=${conversation.get("conversation").conversationId}" class="sns-action-del" data-id="10001_622873">
+                            <a href="${request.contextPath}/msg/delete?conversationId=${conversation.get("conversation").conversationId}" class="sns-action-del" data-id="10001_622873">
                                 删除
                             </a>
-                            <#--<a href="/msg/detail?conversationId=${conversation.get("conversation").conversationId}">-->
-                                <#--${conversation.get("conversation").conversationId}-->
-                            <#--</a>-->
                         </div>
                     </div>
                     <div class="chat-headbox">
@@ -23,7 +20,7 @@
                             ${conversation.get("unreadNum")}
                         </span>
                         <a class="list-head">
-                            <img alt="头像" src="${conversation.get("user").headUrl}">
+                            <img alt="头像" src="${request.contextPath}${conversation.get("user").headUrl}">
                         </a>
                     </div>
                     <div class="letter-detail">
@@ -31,7 +28,7 @@
                             ${conversation.get("user").name}
                         </a>
                         <p class="letter-brief">
-                            <a href="/msg/detail?conversationId=${conversation.get("conversation").conversationId}">
+                            <a href="${request.contextPath}/msg/detail?conversationId=${conversation.get("conversation").conversationId}">
                                 ${conversation.get("conversation").content}
                             </a>
                         </p>
@@ -43,11 +40,3 @@
         </div>
     </div>
 <#include "footer.ftl">
-<script>
-    // $(function () {
-    //     $("a#10001_622873").click(function () {
-    //         // return alert("你确定要删除该对话吗？");
-    //         console.log("dsadsadsa");
-    //     })
-    // })
-</script>

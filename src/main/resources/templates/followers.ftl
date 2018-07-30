@@ -1,12 +1,12 @@
 <#include "header.ftl">
-<link rel="stylesheet" href="/static/styles/result.css">
-<link rel="stylesheet" href="/static/styles/detail.css">
+<link rel="stylesheet" href="${request.contextPath}/static/styles/result.css">
+<link rel="stylesheet" href="${request.contextPath}/static/styles/detail.css">
     <div id="main">
         <div class="zg-wrap zu-main clearfix ">
             <div class="zm-profile-section-wrap zm-profile-followee-page">
                 <div class="zm-profile-section-head">
                     <span class="zm-profile-section-name">
-                        <a href="/user/${curUser.id}">${curUser.name}</a> 粉丝 ${followerCount} 人
+                        <a href="${request.contextPath}/user/${curUser.id}">${curUser.name}</a> 粉丝 ${followerCount} 人
                     </span>
                 </div>
                 <div class="zm-profile-section-list">
@@ -25,13 +25,13 @@
                                             js-follow-user" data-id="${follower.get("user").id}">关注</button>
                                         </div>
                                     </#if>
-                                    <a title="Barty" class="zm-item-link-avatar" href="/user/${follower.get("user").id}">
-                                        <img src="${follower.get("user").headUrl}" class="zm-item-img-avatar">
+                                    <a title="Barty" class="zm-item-link-avatar" href="${request.contextPath}/user/${follower.get("user").id}">
+                                        <img src="${request.contextPath}${follower.get("user").headUrl}" class="zm-item-img-avatar">
                                     </a>
                                     <div class="zm-list-content-medium">
-                                        <h2 class="zm-list-content-title"><a data-tip="p$t$buaabarty" href="/user/${follower.get("user").id}" class="zg-link" title="Barty">${follower.get("user").name}</a></h2>
+                                        <h2 class="zm-list-content-title"><a data-tip="p$t$buaabarty" href="${request.contextPath}/user/${follower.get("user").id}" class="zg-link" title="Barty">${follower.get("user").name}</a></h2>
                                         <div class="details zg-gray">
-                                            <a target="_blank" href="/user/${follower.get("user").id}/followers" class="zg-link-gray-normal">${follower.get("followerCount")}粉丝</a>
+                                            <a target="_blank" href="${request.contextPath}/user/${follower.get("user").id}/followers" class="zg-link-gray-normal">${follower.get("followerCount")}粉丝</a>
                                             /
                                             <a target="_blank" href="/user/${follower.get("user").id}/followees" class="zg-link-gray-normal">${follower.get("followeeCount")}关注</a>
                                             /
@@ -51,4 +51,4 @@
         </div>
     </div>
 <#include "footer.ftl">
-<script type="text/javascript" src="/static/scripts/main/site/follow.js"></script>
+<script type="text/javascript" src="${request.contextPath}/static/scripts/main/site/follow.js"></script>

@@ -6,8 +6,8 @@
         <meta itemprop="ZReactor" data-id="389034" data-meta="{&quot;source_type&quot;: &quot;promotion_answer&quot;, &quot;voteups&quot;: 4168, &quot;comments&quot;: 69, &quot;source&quot;: []}">
         <div class="feed-item-inner">
             <div class="avatar">
-                <a title="${vo.userName}" data-tip="p$t$amuro1230" class="zm-item-link-avatar" target="_blank" href="/user/${vo.userId}">
-                    <img src="${vo.userHead}" class="zm-item-img-avatar">
+                <a title="${vo.userName}" data-tip="p$t$amuro1230" class="zm-item-link-avatar" target="_blank" href="${request.contextPath}/user/${vo.userId}">
+                    <img src="${request.contextPath}${vo.userHead}" class="zm-item-img-avatar">
                 </a>
             </div>
             <div class="feed-main">
@@ -17,11 +17,11 @@
                     </div>
                     <div class="expandable entry-body">
                         <div class="zm-item-answer-author-info">
-                            <a class="author-link" data-tip="p$b$amuro1230" target="_blank" href="/user/${vo.userId}">${vo.userName}</a>
+                            <a class="author-link" data-tip="p$b$amuro1230" target="_blank" href="${request.contextPath}/user/${vo.userId}">${vo.userName}</a>
                             在${vo.createDate?string('yyyy年MM月dd日 hh:mm:ss')}时 <strong>回答</strong> 了该问题</div>
                         <div class="zm-item-rich-text expandable js-collapse-body" data-resourceid="123114" data-action="/answer/content" data-author-name="李淼" data-entry-url="/question/19857995/answer/13174385">
                             <div class="zh-summary summary clearfix">
-                                <a target="_blank" href="/question/${vo.get("questionId")}">${vo.get("questionTitle")}</a>
+                                <a target="_blank" href="${request.contextPath}/question/${vo.get("questionId")}">${vo.get("questionTitle")}</a>
                             </div>
                         </div>
                     </div>
@@ -37,8 +37,8 @@
     <meta itemprop="ZReactor" data-id="389034" data-meta="{&quot;source_type&quot;: &quot;promotion_answer&quot;, &quot;voteups&quot;: 4168, &quot;comments&quot;: 69, &quot;source&quot;: []}">
     <div class="feed-item-inner">
         <div class="avatar">
-            <a title="${vo.userName}" data-tip="p$t$amuro1230" class="zm-item-link-avatar" target="_blank" href="/user/${vo.userId}">
-                <img src="${vo.userHead}" class="zm-item-img-avatar"></a>
+            <a title="${vo.userName}" data-tip="p$t$amuro1230" class="zm-item-link-avatar" target="_blank" href="${request.contextPath}/user/${vo.userId}">
+                <img src="${request.contextPath}${vo.userHead}" class="zm-item-img-avatar"></a>
         </div>
         <div class="feed-main">
             <div class="feed-content" data-za-module="AnswerItem">
@@ -47,11 +47,11 @@
                 </div>
                 <div class="expandable entry-body">
                     <div class="zm-item-answer-author-info">
-                        <a class="author-link" data-tip="p$b$amuro1230" target="_blank" href="/user/$!{vo.userId}">${vo.userName}</a>
+                        <a class="author-link" data-tip="p$b$amuro1230" target="_blank" href="${request.contextPath}/zhihudemo/user/${vo.userId}">${vo.userName}</a>
                         在${vo.createDate?string('yyyy年MM月dd日 hh:mm:ss')}时 <strong>关注</strong> 了该问题</div>
                     <div class="zm-item-rich-text expandable js-collapse-body" data-resourceid="123114" data-action="/answer/content" data-author-name="李淼" data-entry-url="/question/19857995/answer/13174385">
                         <div class="zh-summary summary clearfix">
-                            <a target="_blank" href="/question/${vo.get("questionId")}">${vo.get("questionTitle")}</a>
+                            <a target="_blank" href="${request.contextPath}/question/${vo.get("questionId")}">${vo.get("questionTitle")}</a>
                         </div>
                     </div>
                 </div>
@@ -78,15 +78,15 @@
                                     js-follow-user" data-id="${profileUser.get("user").id}">关注</button>
                             </#if>
                         </div>
-                        <a title="Barty" class="zm-item-link-avatar" href="/user/${profileUser.get("user").id}">
-                            <img src="${profileUser.get("user").headUrl}" class="zm-item-img-avatar">
+                        <a title="Barty" class="zm-item-link-avatar" href="${request.contextPath}/user/${profileUser.get("user").id}">
+                            <img src="${request.contextPath}${profileUser.get("user").headUrl}" class="zm-item-img-avatar">
                         </a>
                         <div class="zm-list-content-medium">
-                            <h2 class="zm-list-content-title"><a data-tip="p$t$buaabarty" href="/user/${profileUser.get("user").id}" class="zg-link">${profileUser.get("user").name}</a></h2>
+                            <h2 class="zm-list-content-title"><a data-tip="p$t$buaabarty" href="${request.contextPath}/user/${profileUser.get("user").id}" class="zg-link">${profileUser.get("user").name}</a></h2>
                             <div class="details zg-gray">
-                                <a target="_blank" href="/user/${profileUser.get("user").id}/followers" class="zg-link-gray-normal">${profileUser.get("followerCount")}粉丝</a>
+                                <a target="_blank" href="${request.contextPath}/user/${profileUser.get("user").id}/followers" class="zg-link-gray-normal">${profileUser.get("followerCount")}粉丝</a>
                                 /
-                                <a target="_blank" href="/user/${profileUser.get("user").id}/followees" class="zg-link-gray-normal">${profileUser.get("followeeCount")}关注</a>
+                                <a target="_blank" href="${request.contextPath}/user/${profileUser.get("user").id}/followees" class="zg-link-gray-normal">${profileUser.get("followeeCount")}关注</a>
                                 /
                                 <a target="_blank" href="#" class="zg-link-gray-normal">${profileUser.get("commentCount")} 回答</a>
                                 /
@@ -103,9 +103,9 @@
                 </div>
                 <div class="list zu-small-avatar-list zg-clear">
                     <#list shareFollowees as sharedFollowee>
-                        <a data-tip="p$b$yi-yi-98-91-99" class="zm-item-link-avatar" href="/user/${sharedFollowee.id}"
+                        <a data-tip="p$b$yi-yi-98-91-99" class="zm-item-link-avatar" href="${request.contextPath}/user/${sharedFollowee.id}"
                             data-original_title="${sharedFollowee.name}">
-                            <img src="${sharedFollowee.headUrl}" class="zm-item-img-avatar">
+                            <img src="${request.contextPath}${sharedFollowee.headUrl}" class="zm-item-img-avatar">
                         </a>
                     </#list>
                 </div>
@@ -148,15 +148,15 @@
                             <meta itemprop="ZReactor" data-id="389034" data-meta="{&quot;source_type&quot;: &quot;promotion_answer&quot;, &quot;voteups&quot;: 4168, &quot;comments&quot;: 69, &quot;source&quot;: []}">
                             <div class="feed-item-inner">
                                 <div class="avatar">
-                                    <a title="${vo.get("user").name}" data-tip="p$t$amuro1230" class="zm-item-link-avatar" target="_blank" href="/user/${vo.get("user").id}">
-                                        <img src="${vo.get("user").headUrl}" class="zm-item-img-avatar"></a>
+                                    <a title="${vo.get("user").name}" data-tip="p$t$amuro1230" class="zm-item-link-avatar" target="_blank" href="${request.contextPath}/user/${vo.get("user").id}">
+                                        <img src="${request.contextPath}${vo.get("user").headUrl}" class="zm-item-img-avatar"></a>
                                 </div>
                                 <div class="feed-main">
                                     <div class="feed-content" data-za-module="AnswerItem">
                                         <meta itemprop="answer-id" content="389034">
                                         <meta itemprop="answer-url-token" content="13174385">
                                         <h2 class="feed-title">
-                                            <a class="question_link" target="_blank" href="/question/${vo.get("question").id}">${vo.get("question").title}</a>
+                                            <a class="question_link" target="_blank" href="${request.contextPath}/question/${vo.get("question").id}">${vo.get("question").title}</a>
                                         </h2>
                                         <div class="feed-question-detail-item">
                                             <div class="question-description-plain zm-editable-content"></div>
@@ -165,7 +165,7 @@
                                             <div class="zm-item-vote">
                                                 <a class="zm-item-vote-count js-expand js-vote-count" href="javascript:;" data-bind-votecount="">4168</a></div>
                                             <div class="zm-item-answer-author-info">
-                                                <a class="author-link" data-tip="p$b$amuro1230" target="_blank" href="/user/${vo.get("user").id}">${vo.get("user").name}</a>
+                                                <a class="author-link" data-tip="p$b$amuro1230" target="_blank" href="${request.contextPath}/user/${vo.get("user").id}">${vo.get("user").name}</a>
                                                 ${vo.get("question").createDate?string('yyyy年MM月dd日 hh:mm:ss')}</div>
                                             <div class="zm-item-vote-info" data-votecount="4168" data-za-module="VoteInfo">
                                                 <span class="voters text">
@@ -182,7 +182,7 @@
                                                     <a data-follow="q:link" class="follow-link zg-follow meta-item" href="javascript:;" id="sfb-123114">
                                                         <i class="z-icon-follow"></i>关注问题</a>
                                                     <a href="#" name="addcomment" class="meta-item toggle-comment js-toggleCommentBox">
-                                                        <i class="z-icon-comment"></i>${vo.get("question").commentCount} 条评论
+                                                        <i class="z-icon-comment"></i>${vo.get("question").commentCount} 个回答
                                                     </a>
                                                     <a href="#" name="addcomment" class="meta-item toggle-comment js-toggleCommentBox">
                                                         <i class="z-icon-fold"></i>${vo.get("followCount")}人收藏该问题
@@ -202,4 +202,4 @@
     </div>
 </div>
 <#include "footer.ftl">
-<script type="text/javascript" src="/static/scripts/main/site/profile.js"></script>
+<script type="text/javascript" src="../static/scripts/main/site/profile.js"></script>

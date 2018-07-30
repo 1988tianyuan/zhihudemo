@@ -8,13 +8,13 @@
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>登录注册</title>
     <link rel="dns-prefetch" href="">
-    <link rel="stylesheet" href="../static/styles/login.css">
+    <link rel="stylesheet" href="static/styles/login.css">
 </head>
 <body class="zhi  no-auth">
 <div class="index-main">
     <div class="index-main-body">
         <div class="index-header">
-            <h1 class="logo hide-text"><img src="../static/images/res/nk.png" alt=""></h1>
+            <h1 class="logo hide-text"><img src="static/images/res/nk.png" alt=""></h1>
             <h2 class="subtitle">
             <#if msg??>
                 ${msg}
@@ -36,8 +36,8 @@
                     </div>
                     <input type="hidden" name="next" value=<#if next??>${next}</#if>>
                     <div class="clearfix button-wrapper command">
-                        <button class="sign-button submit" type="submit" onclick="form=document.getElementById('regloginform');form.action='/login'">登录</button>
-                        <button class="sign-button submit" type="submit" onclick="form=document.getElementById('regloginform');form.action='/reg'">注册</button>
+                        <button class="sign-button submit" type="submit" onclick="form=document.getElementById('regloginform');form.action='login'">登录</button>
+                        <button class="sign-button submit" type="submit" onclick="form=document.getElementById('regloginform');form.action='reg'">注册</button>
                     </div>
                     <div class="signin-misc-wrapper clearfix">
                         <label class="remember-me">

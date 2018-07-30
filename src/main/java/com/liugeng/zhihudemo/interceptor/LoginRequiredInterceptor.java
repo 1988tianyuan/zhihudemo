@@ -1,6 +1,7 @@
 package com.liugeng.zhihudemo.interceptor;
 
 import com.liugeng.zhihudemo.pojo.HostHolder;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,7 +18,9 @@ public class LoginRequiredInterceptor extends HandlerInterceptorAdapter{
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if(null == hostHolder.getUser()){
-            response.sendRedirect("/reglogin?next=" + request.getRequestURI());
+            String contextPath = request.getServletContext().getContextPath();
+            String uri = StringUtils.remove(request.getRequestURI(), contextPath+"/");
+            response.sendRedirect("/zhihudemo/reglogin?next=" + uri);
         }
         return true;
     }

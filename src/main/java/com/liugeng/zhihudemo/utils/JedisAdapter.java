@@ -61,6 +61,51 @@ public class JedisAdapter implements InitializingBean{
         return null;
     }
 
+    public String set(String setName, String value){
+        Jedis jedis = null;
+        try {
+            jedis = pool.getResource();
+            return jedis.set(setName, value);
+        } catch (Exception e) {
+            logger.error("添加redis的k-v元素时出错："+e.getMessage());
+        } finally {
+            if(jedis != null){
+                jedis.close();
+            }
+        }
+        return null;
+    }
+
+    public String get(String key){
+        Jedis jedis = null;
+        try {
+            jedis = pool.getResource();
+            return jedis.get(key);
+        } catch (Exception e) {
+            logger.error("获取redis的k-v元素时出错："+e.getMessage());
+        } finally {
+            if(jedis != null){
+                jedis.close();
+            }
+        }
+        return null;
+    }
+
+    public long incr(String key){
+        Jedis jedis = null;
+        try {
+            jedis = pool.getResource();
+            return jedis.incr(key);
+        } catch (Exception e) {
+            logger.error("自增操作出错："+e.getMessage());
+        } finally {
+            if(jedis != null){
+                jedis.close();
+            }
+        }
+        return 0;
+    }
+
     public long sadd(String setName, String value){
         Jedis jedis = null;
         try {

@@ -20,13 +20,13 @@ public class SensitiveWordsService implements InitializingBean{
     private static final Logger logger = LoggerFactory.getLogger(SensitiveWordsService.class);
     private TrieNode rootNode = new TrieNode();
 
-    public static void main(String[] args){
-        SensitiveWordsService s = new SensitiveWordsService();
-        s.addWord("色情");
-        s.addWord("赌博");
-        s.addWord("暴力");
-        System.out.println(s.filter("色的    暴 力的赌的多 对多赌 博的的暴力的色 情多对多色情狂"));
-    }
+//    public static void main(String[] args){
+//        SensitiveWordsService s = new SensitiveWordsService();
+//        s.addWord("色情");
+//        s.addWord("赌博");
+//        s.addWord("暴力");
+//        System.out.println(s.filter("色的    暴 力的赌的多 对多赌 博的的暴力的色 情多对多色情狂"));
+//    }
 
     /**
      * 过滤器，输入原始文本，将文本中的敏感词替换为"***"，返回处理后的文本
