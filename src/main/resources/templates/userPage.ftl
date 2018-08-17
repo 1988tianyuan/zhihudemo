@@ -162,8 +162,8 @@
                                             <div class="question-description-plain zm-editable-content"></div>
                                         </div>
                                         <div class="expandable entry-body">
-                                            <div class="zm-item-vote">
-                                                <a class="zm-item-vote-count js-expand js-vote-count" href="javascript:;" data-bind-votecount="">4168</a></div>
+                                            <#--<div class="zm-item-vote">-->
+                                                <#--<a class="zm-item-vote-count js-expand js-vote-count" href="javascript:;" data-bind-votecount="">4168</a></div>-->
                                             <div class="zm-item-answer-author-info">
                                                 <a class="author-link" data-tip="p$b$amuro1230" target="_blank" href="${request.contextPath}/user/${vo.get("user").id}">${vo.get("user").name}</a>
                                                 ${vo.get("question").createDate?string('yyyy年MM月dd日 hh:mm:ss')}</div>
