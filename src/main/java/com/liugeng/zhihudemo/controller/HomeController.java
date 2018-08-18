@@ -39,6 +39,24 @@ public class HomeController {
     private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     @RequestMapping(value = {"/index","/"},method = RequestMethod.GET)
+    public String index(Model model, @RequestParam(required = false, value = "recentNum")Integer recentNum){
+        try {
+            User localUser = hostHolder.getUser();
+            int localUid = 0;
+            if(localUser != null) {
+                localUid = localUser.getId();
+            }
+            recentNum = recentNum==null ? 10 : recentNum+10;
+            model.addAttribute("vos", questionService.getQuestionsAndUsers(0,0, recentNum, localUid));
+            model.addAttribute("recentNum", recentNum);
+            return "index";
+        } catch (Exception e) {
+            logger.error("打开问答主页出错："+e.getMessage());
+        }
+        return null;
+    }
+
+    @RequestMapping(value = {"/indexMore"},method = RequestMethod.GET)
     public String index(Model model){
         try {
             User localUser = hostHolder.getUser();
@@ -46,7 +64,7 @@ public class HomeController {
             if(localUser != null){
                 localUid = localUser.getId();
             }
-            model.addAttribute("vos", questionService.getQuestionsAndUsers(0,0,5, localUid));
+            model.addAttribute("vos", questionService.getQuestionsAndUsers(0,0,20, localUid));
             return "index";
         } catch (Exception e) {
             logger.error("打开问答主页出错："+e.getMessage());

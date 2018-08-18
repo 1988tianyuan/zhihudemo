@@ -76,7 +76,7 @@
                     </div>
                     </#list>
                 </div>
-                <a href="javascript:;" id="zh-load-more" data-method="next" class="zg-btn-white zg-r3px zu-button-more" style="">更多</a></div>
+                <a href="./?recentNum=${recentNum}" id="zh-load-more" data-method="next" class="zg-btn-white zg-r3px zu-button-more" style="">更多</a></div>
         </div>
     </div>
 </div>

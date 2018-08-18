@@ -8,7 +8,7 @@
         <div class="feed-item-inner">
             <div class="avatar">
                 <a title="${vo.userName}" data-tip="p$t$amuro1230" class="zm-item-link-avatar" target="_blank" href="/user/${vo.userId}">
-                    <img src="${vo.userHead}" class="zm-item-img-avatar">
+                    <img src="${request.contextPath}${vo.userHead}" class="zm-item-img-avatar">
                 </a>
             </div>
             <div class="feed-main">
@@ -43,7 +43,7 @@
         <div class="feed-item-inner">
             <div class="avatar">
                 <a title="${vo.userName}" data-tip="p$t$amuro1230" class="zm-item-link-avatar" target="_blank" href="/user/${vo.userId}">
-                    <img src="${vo.userHead}" class="zm-item-img-avatar">
+                    <img src="${request.contextPath}${vo.userHead}" class="zm-item-img-avatar">
                 </a>
             </div>
             <div class="feed-main">
@@ -74,7 +74,7 @@
     <div class="feed-item-inner">
         <div class="avatar">
             <a title="${vo.userName}" data-tip="p$t$amuro1230" class="zm-item-link-avatar" target="_blank" href="/user/${vo.userId}">
-                <img src="${vo.userHead}" class="zm-item-img-avatar"></a>
+                    <img src="${request.contextPath}${vo.userHead}" class="zm-item-img-avatar"></a>
         </div>
         <div class="feed-main">
             <div class="feed-content" data-za-module="AnswerItem">
@@ -97,8 +97,8 @@
 </div>
 </#macro>
 
-<link rel="stylesheet" href="../static/styles/index.css">
-<link rel="stylesheet" href="../static/styles/detail.css">
+<link rel="stylesheet" href="./static/styles/index.css">
+<link rel="stylesheet" href="./static/styles/detail.css">
 <div class="zg-wrap zu-main clearfix " role="main">
     <div class="zu-main-content">
         <div class="zu-main-content-inner">

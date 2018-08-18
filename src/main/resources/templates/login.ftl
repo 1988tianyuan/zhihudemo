@@ -14,7 +14,7 @@
 <div class="index-main">
     <div class="index-main-body">
         <div class="index-header">
-            <h1 class="logo hide-text"><img src="static/images/res/nk.png" alt=""></h1>
+            <h1 class="logo hide-text"><img src="static/images/res/zhihu.png" alt=""></h1>
             <h2 class="subtitle">
             <#if msg??>
                 ${msg}
